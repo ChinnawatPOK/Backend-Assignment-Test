@@ -24,23 +24,22 @@ public class JobDataController {
     public ResponseEntity<ApiResponse> getJobData(
             @RequestParam(required = false) String job_title,
             @RequestParam(required = false) String gender,
-            @RequestParam(name = "salary[gte]", required = false) BigDecimal salaryGte,
-            @RequestParam(name = "salary[lte]", required = false) BigDecimal salaryLte,
-            @RequestParam(name = "salary[eq]",  required = false) BigDecimal salaryEq,
+            @RequestParam(name = "salaryGte", required = false) BigDecimal salaryGte,
+            @RequestParam(name = "salaryLte", required = false) BigDecimal salaryLte,
+            @RequestParam(name = "salaryEq",  required = false) BigDecimal salaryEq,
             @RequestParam(required = false) String fields,
             @RequestParam(required = false) String sort,
             @RequestParam(required = false, defaultValue = "ASC") String sort_type
     ) {
 
-        JobDataFilter filter = JobDataFilter.builder()
-                .jobTitle(job_title)
-                .gender(gender)
-                .salaryGte(salaryGte)
-                .salaryLte(salaryLte)
-                .salaryEq(salaryEq)
-                .sort(sort)
-                .sortType(sort_type)
-                .build();
+        JobDataFilter filter = new JobDataFilter();
+        filter.setJobTitle(job_title);
+        filter.setGender(gender);
+        filter.setSalaryGte(salaryGte);
+        filter.setSalaryLte(salaryLte);
+        filter.setSalaryEq(salaryEq);
+        filter.setSort(sort);
+        filter.setSortType(sort_type);
 
         if (fields != null && !fields.isBlank()) {
             filter.setFields(Arrays.asList(fields.split(",")));
