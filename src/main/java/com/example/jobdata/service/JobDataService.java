@@ -5,6 +5,7 @@ import com.example.jobdata.dto.JobDataFilter;
 import com.example.jobdata.model.JobData;
 import com.example.jobdata.repository.JobDataRepository;
 import com.example.jobdata.util.FieldExtractor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,15 +16,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@RequiredArgsConstructor
 public class JobDataService {
 
     private final JobDataRepository repository;
     private final FieldExtractor fieldExtractor;
-
-    public JobDataService(JobDataRepository repository, FieldExtractor fieldExtractor) {
-        this.repository = repository;
-        this.fieldExtractor = fieldExtractor;
-    }
 
     public ApiResponse query(JobDataFilter filter) {
         Stream<JobData> allDataLoaded = repository.findAll().stream();
