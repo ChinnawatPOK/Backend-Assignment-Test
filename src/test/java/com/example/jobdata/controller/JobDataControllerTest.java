@@ -41,7 +41,7 @@ class JobDataControllerTest {
         when(service.query(any())).thenReturn(ApiResponse.builder().total(1).data(List.of()).build());
 
         mockMvc.perform(get("/api/v1/job_data")
-                        .param("salary[gte]", "120000"))
+                        .param("salaryGte", "120000"))
                 .andExpect(status().isOk());
 
         verify(service).query(argThat(filter ->
